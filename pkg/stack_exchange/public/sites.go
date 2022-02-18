@@ -9,7 +9,8 @@ import (
 )
 
 func GetStackExchangeSites() {
-	url := "https://api.stackexchange.com/2.3/sites"
+	queries := map[string]string{}
+	url := API.GenerateURL("sites", queries)
 
 	request := API.APIRequest{
 		URL:         url,
@@ -21,13 +22,14 @@ func GetStackExchangeSites() {
 	if err != nil {
 		panic(err)
 	}
-	var response API_Types.API_SitesResponse
+	var sites []API_Types.SiteInfo
+	response := API_Types.APIResponse{Items: &sites}
 	err = json.Unmarshal(response_byte, &response)
 	if err != nil {
 		panic(err)
 	}
 
-	for _, site := range response.Items {
+	for _, site := range sites {
 		fmt.Printf("%s: %s (%s)\n", site.Slug, site.Name, site.SiteURL)
 	}
 }

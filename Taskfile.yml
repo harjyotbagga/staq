@@ -10,8 +10,3 @@ tasks:
         desc: Run the app
         cmds:
         - GOFLAGS=-mod=mod go run internal/main.go
-
-    docs:
-        desc: Doc for swagger
-        cmds:
-        - docker run -i yousan/swagger-yaml-to-html < pkg/swagger/swagger.yml > doc/index.html

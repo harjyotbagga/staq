@@ -9,7 +9,11 @@ import (
 )
 
 func GetStackExchangeArticles() {
-	url := "https://api.stackexchange.com/2.3/sites"
+	queries := map[string]string{}
+	queries["site"] = "stackoverflow"
+	queries["sort"] = "activity"
+	queries["order"] = "desc"
+	url := API.GenerateURL("articles", queries)
 
 	request := API.APIRequest{
 		URL:         url,
@@ -21,13 +25,15 @@ func GetStackExchangeArticles() {
 	if err != nil {
 		panic(err)
 	}
-	var response API_Types.API_SitesResponse
+
+	var articles []API_Types.ArticleInfo
+	response := API_Types.APIResponse{Items: &articles}
 	err = json.Unmarshal(response_byte, &response)
 	if err != nil {
 		panic(err)
 	}
 
-	for _, site := range response.Items {
-		fmt.Printf("%s: %s (%s)\n", site.Slug, site.Name, site.SiteURL)
+	for _, article := range articles {
+		fmt.Printf("%s: %s\n", article.Title, article.Tags)
 	}
 }

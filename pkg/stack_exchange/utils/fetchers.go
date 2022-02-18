@@ -32,6 +32,14 @@ type APIRequest struct {
 	Body        io.Reader
 }
 
+func GenerateURL(endpoint string, queries map[string]string) string {
+	query_string := ""
+	for key, value := range queries {
+		query_string += fmt.Sprintf("%s=%v&", key, value)
+	}
+	return fmt.Sprintf("%s%s/%s?%s", API_URL, API_VERSION, endpoint, query_string)
+}
+
 func CallAPI(request APIRequest) ([]byte, error) {
 	var response *http.Response
 	switch request.Method {
