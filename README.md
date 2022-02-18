@@ -1,6 +1,6 @@
 # staq
 
-STAQ -> StackOverflow Asked Questions
+STAQ -> StackExchangeAsked Questions
 
 ## Dependencies
 
