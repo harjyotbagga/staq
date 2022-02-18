@@ -10,3 +10,8 @@ tasks:
         desc: Run the app
         cmds:
         - GOFLAGS=-mod=mod go run main.go
+
+    lint-test:
+        desc: Run the lint test before pushing code to GitHub
+        cmds:
+        - golangci-lint run
