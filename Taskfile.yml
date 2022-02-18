@@ -4,9 +4,9 @@ tasks:
     build:
         desc: Build the app
         cmds:
-        - GOFLAGS=-mod=mod go build -o bin/staq-api internal/main.go 
+        - GOFLAGS=-mod=mod go build -o bin/staq main.go 
 
     run: 
         desc: Run the app
         cmds:
-        - GOFLAGS=-mod=mod go run internal/main.go
+        - GOFLAGS=-mod=mod go run main.go
